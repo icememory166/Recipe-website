@@ -2,10 +2,12 @@ const searchBtn = document.getElementById('search-btn');
 const mealList = document.getElementById('meal');
 const mealDetailsContent = document.querySelector('.meal-details-content');
 const recipeCloseBtn = document.getElementById('recipe-close-btn');
+const randomRecipeBtn = document.getElementById('random-button')
 
 // event listeners
 searchBtn.addEventListener('click', getMealList);
 mealList.addEventListener('click', getMealRecipe);
+randomRecipeBtn.addEventListener('click', getRandomMeal);
 recipeCloseBtn.addEventListener('click', () => {
     mealDetailsContent.parentElement.classList.remove('showRecipe');
 });
@@ -43,6 +45,17 @@ function getMealList(){
 
         mealList.innerHTML = html;
     });
+}
+
+// get random recipe
+function getRandomMeal(e){
+    e.preventDefault();
+    if(e.target.classList.contains('button')){
+        let mealItem = e.target.parentElement.parentElement;
+        fetch(`https://www.themealdb.com/api/json/v1/1/random.php`)
+        .then(response => response.json())
+        .then(data => mealRecipeModal(data.meals));
+    }
 }
 
 
