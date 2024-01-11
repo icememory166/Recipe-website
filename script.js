@@ -51,7 +51,6 @@ function getMealList(){
 function getRandomMeal(e){
     e.preventDefault();
     if(e.target.classList.contains('button')){
-        let mealItem = e.target.parentElement.parentElement;
         fetch(`https://www.themealdb.com/api/json/v1/1/random.php`)
         .then(response => response.json())
         .then(data => mealRecipeModal(data.meals));
